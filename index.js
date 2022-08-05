@@ -61,7 +61,7 @@ function ChooseCity() {
             if (!can) {
                 currentCityIndex = getRandomInt(0, c_country.length);
             } else {
-                if (GetLastSymbol(c_name[playerIndex]).toUpperCase() != GetFirstSymbol(currentCityIndex).toUpperCase()) {
+                if ((playerIndex > -1) && (GetLastSymbol(c_name[playerIndex]).toUpperCase() != GetFirstSymbol(c_name[currentCityIndex]).toUpperCase())) {
                     can = false;
                     currentCityIndex = getRandomInt(0, c_country.length);
                 }
@@ -97,7 +97,8 @@ function WriteCityToLabel(index) {
 }
 
 function GetLastSymbol(text) {
-    // Если плохой символ, брать дальше
+    let result = "ь";
+    while((result == "ь") || (result == "ъ") || (result == "й"))
     return text.substr(text.length - 1);
 }
 function GetFirstSymbol(text) {
