@@ -22,7 +22,7 @@
       </div>
       <div class="main">
         <div class="container">
-          <div class="col">
+          <div class="col" id="score">
             <p>Ваш счет: <span>0</span></p>
           </div>
           <div class="col">
@@ -37,15 +37,15 @@
             <form action="POST">
               <div class="form-group">
                 <label for="exampleInputPassword1">Ваш ответ:</label>
-                <input type="text" class="form-control" placeholder="А">
+                <input type="text" class="form-control" placeholder="А" id="labelPlayer">
               </div>
-              <button type="button" class="btn btn-primary">Отправить</button>
+              <button type="button" class="btn btn-primary" onclick="SubmitAnswer();">Отправить</button>
             </form>
           </div>
           <div class="col">
             <form action="POST">
               <div class="form-group">
-                <input type="text" class="form-control" id="label" value="">
+                <input type="text" class="form-control" id="labelError" value="" readonly>
               </div>
             </form>
           </div>

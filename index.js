@@ -12,6 +12,8 @@ let co_name = [];
 
 let idUsedCities = [];
 
+let score = 0;
+
 function getRandomInt(min, max) {
     min = Math.round(min);
     max = Math.round(max);
@@ -21,6 +23,7 @@ function getRandomInt(min, max) {
 
 
 let currentCityIndex;
+let playerIndex = -1;
 
 window.onload = function() {
     let arrCities = file.split(',');
@@ -38,8 +41,15 @@ window.onload = function() {
     // Выбрать один город
     //currentCityIndex = getRandomInt(0, c_country.length);
     ChooseCity();
-    WriteCityToLabel(currentCityIndex);
+    //WriteCityToLabel(currentCityIndex);
 };
+
+function CreateError(error) {
+    document.getElementById("labelError").value = error;
+}
+function ClearError() {
+    document.getElementById("labelError").value = "";
+}
 
 function ChooseCity() {
     currentCityIndex = getRandomInt(0, c_country.length);
@@ -50,13 +60,18 @@ function ChooseCity() {
             can = !isCityUsed(currentCityIndex);
             if (!can) {
                 currentCityIndex = getRandomInt(0, c_country.length);
+            } else {
+                if (GetLastSymbol(c_name[playerIndex]).toUpperCase() != GetFirstSymbol(currentCityIndex).toUpperCase()) {
+                    can = false;
+                    currentCityIndex = getRandomInt(0, c_country.length);
+                }
             }
         }
         idUsedCities.push(currentCityIndex);
     } else {
-        // Закончились города
-
+        CreateError("Все гоода были использованы");
     }
+    WriteCityToLabel(currentCityIndex);
 }
 
 function isCityUsed(cityIndex) {
@@ -82,6 +97,7 @@ function WriteCityToLabel(index) {
 }
 
 function GetLastSymbol(text) {
+    // Если плохой символ, брать дальше
     return text.substr(text.length - 1);
 }
 function GetFirstSymbol(text) {
@@ -98,25 +114,38 @@ function SubmitAnswer() {
         // Совпадает ли первый и последний символ?
         if (GetLastSymbol(c_name[currentCityIndex]).toUpperCase() == GetFirstSymbol(answer).toUpperCase()) {
             // Существует ли такой город?
-            let exist = false;
+            let cityIndex = -1;
             for(let i = 0; i < c_name.length; i++) {
                 if (c_name[i].toUpperCase() == answer.toUpperCase()) {
-                    exist = true;
+                    cityIndex = i;
                     break;
                 }
             }
 
-            if (exist) {
+            if (cityIndex > -1) {
                 // Использовался ли он?
-                
+                if (!isCityUsed(cityIndex)) {
+                    playerIndex = cityIndex;
+
+                    ChooseCity();
+                    idUsedCities.push(cityIndex);
+
+                    CreateError("Принято!");
+                    document.getElementById("labelPlayer").value = "";
+
+                    score++;
+                    document.getElementById("score").innerHTML = `Ваш счёт: ${score}`;
+                } else {
+                    CreateError("Этот город уже использовался");
+                }
             } else {
-                // Такого города нет
+                CreateError("Такого города нет");
             }
         } else {
-            // Не с той буквы
+            CreateError("Ваш город начинается не на ту букву");
         }
     } else {
-        // Дайте ответ
+        CreateError("Введите ответ в поле для ответа");
     }
 }
 
