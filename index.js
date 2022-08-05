@@ -114,6 +114,7 @@ function GetFirstSymbol(text) {
 
 function SubmitAnswer() {
     let answer = document.getElementById("labelPlayer").value;
+    answer = answer.trim();
 
     // Проверки ответа
 
