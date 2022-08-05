@@ -10,6 +10,8 @@ let c_name = [];
 let co_id = [];
 let co_name = [];
 
+let idUsedCities = [];
+
 function getRandomInt(min, max) {
     min = Math.round(min);
     max = Math.round(max);
@@ -34,9 +36,37 @@ window.onload = function() {
     }
 
     // Выбрать один город
-    currentCityIndex = getRandomInt(0, c_country.length);
+    //currentCityIndex = getRandomInt(0, c_country.length);
+    ChooseCity();
     WriteCityToLabel(currentCityIndex);
 };
+
+function ChooseCity() {
+    currentCityIndex = getRandomInt(0, c_country.length);
+
+    if (idUsedCities.length < c_country.length) {
+        let can = false;
+        while(!can) {
+            can = !isCityUsed(currentCityIndex);
+            if (!can) {
+                currentCityIndex = getRandomInt(0, c_country.length);
+            }
+        }
+        idUsedCities.push(currentCityIndex);
+    } else {
+        // Закончились города
+
+    }
+}
+
+function isCityUsed(cityIndex) {
+    for(let i = 0; i < idUsedCities.length; i++) {
+        if (idUsedCities[i] == cityIndex) {
+            return true;
+        }
+    }
+    return false;
+}
 
 function WriteCityToLabel(index) {
     let countryIndex;
@@ -63,12 +93,30 @@ function SubmitAnswer() {
 
     // Проверки ответа
 
-    alert(answer);
-    // Совпадает ли первый и последний символ?
-    if (GetLastSymbol(c_name[currentCityIndex]).toUpperCase() == GetFirstSymbol(answer).toUpperCase()) {
-        alert(true);
+    // Пустое ли поле?
+    if (answer != "") {
+        // Совпадает ли первый и последний символ?
+        if (GetLastSymbol(c_name[currentCityIndex]).toUpperCase() == GetFirstSymbol(answer).toUpperCase()) {
+            // Существует ли такой город?
+            let exist = false;
+            for(let i = 0; i < c_name.length; i++) {
+                if (c_name[i].toUpperCase() == answer.toUpperCase()) {
+                    exist = true;
+                    break;
+                }
+            }
+
+            if (exist) {
+                // Использовался ли он?
+                
+            } else {
+                // Такого города нет
+            }
+        } else {
+            // Не с той буквы
+        }
     } else {
-        alert(false);
+        // Дайте ответ
     }
 }
 
