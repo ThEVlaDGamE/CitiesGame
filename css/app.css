@@ -8,3 +8,9 @@
 .main .col{
   margin: 20px 0;
 }
+.rule_text{
+  font-size: 20px;
+}
+.main label{
+  font-size: 20px;
+}
