@@ -99,15 +99,17 @@ function WriteCityToLabel(index) {
 function GetLastSymbol(text) {
     let ratio = 1;
 
-    let result = text.substr(text.length - ratio);
-    while((result == "ь") || (result == "ъ") || (result == "й")) {
+    let result = Array.from(text)[text.length - ratio];
+    //alert(result);
+    while((result == "ь") || (result == "ъ") || (result == "й")  || (result == "(")  || (result == ")")) {
         ratio++;
-        result = text.substr(text.length - ratio);
+        result = Array.from(text)[text.length - ratio];
+        //alert(result);
     }
     return result;
 }
 function GetFirstSymbol(text) {
-    return Array.from(text)[0];;
+    return Array.from(text)[0];
 }
 
 function SubmitAnswer() {
