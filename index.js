@@ -48,12 +48,27 @@ function WriteCityToLabel(index) {
     }
 
     document.getElementById("label").value = `${c_name[index]} (${co_name[countryIndex]})`;
-    document.getElementById("labelPlayer").placeholder = c_name[currentCityIndex].substr(c_name[currentCityIndex].length - 1).toUpperCase();
+    document.getElementById("labelPlayer").placeholder = GetLastSymbol(c_name[currentCityIndex]).toUpperCase();
+}
 
-
+function GetLastSymbol(text) {
+    return text.substr(text.length - 1);
+}
+function GetFirstSymbol(text) {
+    return Array.from(text)[0];;
 }
 
 function SubmitAnswer() {
-    
+    let answer = document.getElementById("labelPlayer").value;
+
+    // Проверки ответа
+
+    alert(answer);
+    // Совпадает ли первый и последний символ?
+    if (GetLastSymbol(c_name[currentCityIndex]).toUpperCase() == GetFirstSymbol(answer).toUpperCase()) {
+        alert(true);
+    } else {
+        alert(false);
+    }
 }
 
