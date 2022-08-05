@@ -97,9 +97,14 @@ function WriteCityToLabel(index) {
 }
 
 function GetLastSymbol(text) {
-    let result = "ь";
-    while((result == "ь") || (result == "ъ") || (result == "й"))
-    return text.substr(text.length - 1);
+    let ratio = 1;
+
+    let result = text.substr(text.length - ratio);
+    while((result == "ь") || (result == "ъ") || (result == "й")) {
+        ratio++;
+        result = text.substr(text.length - ratio);
+    }
+    return result;
 }
 function GetFirstSymbol(text) {
     return Array.from(text)[0];;
