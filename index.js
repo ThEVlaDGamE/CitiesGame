@@ -48,5 +48,12 @@ function WriteCityToLabel(index) {
     }
 
     document.getElementById("label").value = `${c_name[index]} (${co_name[countryIndex]})`;
+    document.getElementById("labelPlayer").placeholder = c_name[currentCityIndex].substr(c_name[currentCityIndex].length - 1).toUpperCase();
+
+
+}
+
+function SubmitAnswer() {
+    
 }
 
