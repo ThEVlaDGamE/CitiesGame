@@ -57,25 +57,29 @@ window.onload = function() {
 function CreateMessage(error) {
     document.getElementsByClassName("check_answer")['answer'].innerHTML = error;
 }
-// Удалить сообщение
-function ClearMessage() {
-    document.getElementsByClassName("your_answer")['answer'].innerHTML = "";
+
+// Изменить количество очков, обновить текстовое поле
+function ScoreChange(scoreRatio, text) {
+    CreateMessage(text);
+
+    score += scoreRatio;
+    document.querySelector("#score span").innerHTML = score;
 }
 
+// Стоимость пропуска хода
+const citySkipCost = 3;
 // Функция выбора города игрой
 function ChooseCity(skip=false) {
-		// Нажатие по кнопке "пропустить" вызывает функцию с аргументом true
-		if (skip) {
-			// числа больше 0 дают true
-			if (score) {
-				CreateMessage(`${document.getElementById("answer").innerHTML} пропущен! -1`);
-				// Обновление счёта
-                    score--;
-                    document.querySelector("#score span").innerHTML = score;
-			} else {
-				return CreateMessage(`Не хватает очков!`);
-			}
-		}
+    // Нажатие по кнопке "пропустить" вызывает функцию с аргументом true
+    if (skip) {
+        // Если очков больше, чем стоимость пропуска хода
+        if (score >= citySkipCost) {
+            // Обновление счёта
+            ScoreChange(-citySkipCost, `${document.getElementById("answer").innerHTML} пропущен! -${citySkipCost}`);
+        } else {
+            return CreateMessage(`Для пропуска хода нужно 3 очка!`);
+        }
+    }
     // Выбирает рандомный город из списка
     gameCityIndex = getRandomInt(0, city_countryNumber.length);
 
@@ -157,7 +161,7 @@ function GetFirstSymbol(text) {
 // Функция нажатия на кнопку ответа
 function SubmitAnswer() {
     // Получить ответ
-    let answer = document.getElementsByClassName("your_answer")['answer'].innerHTML
+    let answer = document.getElementsByClassName("your_answer")['answer'].innerHTML;
     // Проверки ответа
     // Пустое ли поле?
     if (answer != "") {
@@ -180,13 +184,10 @@ function SubmitAnswer() {
                     // Добавление города в использованные города
                     idUsedCities.push(cityIndex);
 
-                    CreateMessage(`${city_cityName[cityIndex]} принят! +1`);
-                    // Очистка поля для ответа
-                    ClearMessage();
-
                     // Обновление счёта
-                    score++;
-                    document.querySelector("#score span").innerHTML = score;
+                    ScoreChange(1, `${city_cityName[cityIndex]} принят! +1`);
+                    // Очистка поля для ответа
+                    document.getElementsByClassName("your_answer")['answer'].innerHTML = "";
 
                     // Выбор нового города игрой
                     ChooseCity();
