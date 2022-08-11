@@ -57,7 +57,7 @@ body {
 
 .rule_text, #score {
   color: lightskyblue;
-  text-shadow:
+  /*text-shadow:
       0 0 7px #fff2,
       0 0 10px #fff2,
       0 0 21px #fff2,
@@ -65,7 +65,7 @@ body {
       0 0 82px #0fa2,
       0 0 92px #0fa2,
       0 0 102px #0fa2,
-      0 0 151px #0fa2;
+      0 0 151px #0fa2;*/
 }
 
 #answer {
