@@ -8,8 +8,8 @@
         <title>Играть в города. Онлайн игра в названия городов</title>
         <meta name="author" content="ThEVlaDGamE x degradik">
         <meta name="keywords" content="играть, города, онлайн">
-        <link href="css/app.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link href="css/app.css" rel="stylesheet" type="text/css">
         <link rel="icon" href="/favicon.ico">
     </head>
     <body>
@@ -25,25 +25,27 @@
           <div class="col" id="score">
             <p>Ваш счет: <span>0</span></p>
           </div>
-          <div class="col">
+          <div class="col" id="answers">
             <form action="POST">
               <div class="form-group">
-                <label for="exampleInputPassword1">Ответ противника:</label>
-                <input type="text" class="form-control" placeholder="город" id="label" readonly value="">
+                <label for="exampleInputPassword1" class="enemy_title_label">Ответ противника:</label>
+                <p id = "answer"></p>
               </div>
             </form>
           </div>
-          <div class="col">
+          <div class="col" id="answers">
             <div class="form-group">
-              <label for="exampleInputPassword1">Ваш ответ:</label>
-              <input type="text" class="form-control" placeholder="А" id="labelPlayer">
+              <label for="exampleInputPassword1" class="your_title_label">Ваш ответ:</label>
+              <div id = "answer" class = "your_answer" contenteditable>
+              </div>
             </div>
-            <button type="button" class="btn btn-primary" onclick="SubmitAnswer();">Отправить</button>
+            <button type="button" id = "send" onclick="SubmitAnswer();">Отправить</button>
+            <button type="button" id = "skip" onclick="ChooseCity(true);">Пропустить</button>
           </div>
-          <div class="col">
+          <div class="col" id="answers">
             <form action="POST">
               <div class="form-group">
-                <input type="text" class="form-control" id="labelError" value="" readonly>
+                <p id = "answer" class = "check_answer"></p>
               </div>
             </form>
           </div>
@@ -54,7 +56,7 @@
         <div class="container">
           <div class="col">
             <h2 class="text-center header_name">Правила</h3>
-            <p class="rule_text">В поле "ответа противника" написано название города, ваша цель - назвать город, который начинается с той буквы, на которую закончилось название города противника.</p>
+            <p class="rule_text">В поле "ответ противника" написано название города, ваша цель - назвать город, который начинается с той буквы, на которую закончилось название города противника.</p>
           </div>
         </div>
       </div>

@@ -55,15 +55,27 @@ window.onload = function() {
 
 // Создать сообщение
 function CreateMessage(error) {
-    document.getElementById("labelError").value = error;
+    document.getElementsByClassName("check_answer")['answer'].innerHTML = error;
 }
 // Удалить сообщение
 function ClearMessage() {
-    document.getElementById("labelError").value = "";
+    document.getElementsByClassName("your_answer")['answer'].innerHTML = "";
 }
 
 // Функция выбора города игрой
-function ChooseCity() {
+function ChooseCity(skip=false) {
+		// Нажатие по кнопке "пропустить" вызывает функцию с аргументом true
+		if (skip) {
+			// числа больше 0 дают true
+			if (score) {
+				CreateMessage(`${document.getElementById("answer").innerHTML} пропущен! -1`);
+				// Обновление счёта
+                    score--;
+                    document.querySelector("#score span").innerHTML = score;
+			} else {
+				return CreateMessage(`Не хватает очков!`);
+			}
+		}
     // Выбирает рандомный город из списка
     gameCityIndex = getRandomInt(0, city_countryNumber.length);
 
@@ -79,7 +91,7 @@ function ChooseCity() {
             } else {
                 // Если нет, начинается ли название города на букву, на которую заканчивается название предыдущего?
                 if ((playerCityIndex > -1) && 
-                (GetLastSymbol(city_cityName[playerCityIndex]).toUpperCase() != 
+                (GetLastSymbol(city_cityName[playerCityIndex])[0].toUpperCase() != 
                 GetFirstSymbol(city_cityName[gameCityIndex]).toUpperCase())) {
                     // Если да, выбрать другой
                     can = false;
@@ -90,7 +102,7 @@ function ChooseCity() {
         // Добавить индекс города в массив использованных городов
         idUsedCities.push(gameCityIndex);
     } else {
-        CreateMessage("Все города были использованы");
+        CreateMessage("Все города были использованы.");
     }
     
     // Определяет, в какой стране находится выбранный город
@@ -101,10 +113,18 @@ function ChooseCity() {
             break;
         }
     }
+    // Находит последнюю букву слова и окружает тегом span
+    let city_name_word = []
+    for (let i = 0; i < city_cityName[gameCityIndex].length; i++) {
+    	if (i == GetLastSymbol(city_cityName[gameCityIndex])[1]) {
+    		city_name_word.push(`<span>${GetLastSymbol(city_cityName[gameCityIndex])[0]}</span>`)
+    	} else {
+    		city_name_word.push(city_cityName[gameCityIndex][i])
+    	}
+    }
 
-    // Отображение информации
-    document.getElementById("label").value = `${city_cityName[gameCityIndex]} (${country_countryName[countryIndex]})`;
-    document.getElementById("labelPlayer").placeholder = GetLastSymbol(city_cityName[gameCityIndex]).toUpperCase();
+    // Отображение информации о нынешнем городе (страна города)
+    document.getElementById("answer").innerHTML = `${city_name_word.join('')} (${country_countryName[countryIndex]})`;
 }
 
 // Был ли использован город?
@@ -120,12 +140,12 @@ function isCityUsed(cityIndex) {
 // Получить последний символ города
 function GetLastSymbol(text) {
     let ratio = 1;
-
-    let result = Array.from(text)[text.length - ratio];
-    // Если последний символ "ьъй()" - взять следующий символ
-    while((result == "ь") || (result == "ъ") || (result == "й")  || (result == "(")  || (result == ")")) {
+    // Содержит список ['буква', её индекс в слове]
+    let result = [Array.from(text)[text.length - ratio], text.length - ratio];
+    // Если последний символ "ыьъй()" - взять следующий символ
+    while( (result[0] == "ы") || (result[0] == "ь") || (result[0] == "ъ") || (result[0] == "й")  || (result[0] == "(")  || (result[0] == ")") ) {
         ratio++;
-        result = Array.from(text)[text.length - ratio];
+        result = [Array.from(text)[text.length - ratio], text.length - ratio];
     }
     return result;
 }
@@ -137,14 +157,12 @@ function GetFirstSymbol(text) {
 // Функция нажатия на кнопку ответа
 function SubmitAnswer() {
     // Получить ответ
-    let answer = document.getElementById("labelPlayer").value;
-    answer = answer.trim();
-
+    let answer = document.getElementsByClassName("your_answer")['answer'].innerHTML
     // Проверки ответа
     // Пустое ли поле?
     if (answer != "") {
         // Совпадает ли первый и последний символ?
-        if (GetLastSymbol(city_cityName[gameCityIndex]).toUpperCase() == GetFirstSymbol(answer).toUpperCase()) {
+        if (GetLastSymbol(city_cityName[gameCityIndex])[0].toUpperCase() == GetFirstSymbol(answer).toUpperCase()) {
             // Существует ли такой город?
             let cityIndex = -1;
             for(let i = 0; i < city_cityName.length; i++) {
@@ -162,13 +180,13 @@ function SubmitAnswer() {
                     // Добавление города в использованные города
                     idUsedCities.push(cityIndex);
 
-                    CreateMessage("Принято!");
+                    CreateMessage(`${city_cityName[cityIndex]} принят! +1`);
                     // Очистка поля для ответа
-                    document.getElementById("labelPlayer").value = "";
+                    ClearMessage();
 
                     // Обновление счёта
                     score++;
-                    document.getElementById("score").innerHTML = `Ваш счёт: ${score}`;
+                    document.querySelector("#score span").innerHTML = score;
 
                     // Выбор нового города игрой
                     ChooseCity();
