@@ -1,7 +1,34 @@
-.header_name{
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400&display=swap');
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #022;
+  background: url("https://img1.akspic.ru/crops/1/5/8/8/6/168851/168851-nyujork-medison_skver_park-fletajron_bilding-centralnyj_park-yunion_skver-3840x2160.jpg") fixed;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  z-index: -3;
+  backdrop-filter: brightness(60%);
+}
+
+
+.header_name {
+  color: lightgreen;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
   padding: 20px 10px 10px 0;
   border-bottom: 2px solid rgb(99, 99, 99);
 }
+
 .main button{
   margin-top: 15px;
 }
@@ -11,6 +38,99 @@
 .rule_text{
   font-size: 20px;
 }
-.main label{
+
+#score {
+  margin: 0;
+}
+
+#score span {
+  color: yellow;
+}
+
+.enemy_title_label {
+  color: orangered;
+}
+
+.your_title_label {
+  color: lightgreen;
+}
+
+.rule_text, #score {
+  color: lightskyblue;
+  text-shadow:
+      0 0 7px #fff2,
+      0 0 10px #fff2,
+      0 0 21px #fff2,
+      0 0 42px #0fa2,
+      0 0 82px #0fa2,
+      0 0 92px #0fa2,
+      0 0 102px #0fa2,
+      0 0 151px #0fa2;
+}
+
+#answer {
   font-size: 20px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  text-align: center;
+  color: #0fa;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: rgba(0,0,0,0.5);
+  min-width: 40%;
+  max-width: 80%;
+  padding: 10px;
+}
+
+#answer span {
+  color: red;
+}
+
+#answers {
+  text-align: center;
+}
+
+#answers .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.check_answer {
+  margin-bottom: 0;
+}
+
+#send {
+  color: white;
+  background: rgba(0,255,70,0.2);
+  border: 1px solid rgba(255,255,0,0.5);
+  border-radius: 10px 0 0 10px;
+  padding: 15px;
+  transition: all .2s;
+}
+
+#skip {
+  color: white;
+  background: rgba(0,70,255,0.2);
+  border: 1px solid rgba(255,255,0,0.5);
+  border-radius: 0px 10px 10px 0;
+  padding: 15px;
+  transition: all .2s;
+}
+
+#send:focus {
+  background: rgba(0,255,70,0.5);
+}
+
+#skip:focus {
+  background: rgba(0,70,255,0.5);
+}
+
+@media (max-width: 1024px) {
+  #send:hover {
+    background: rgba(0,255,70,0.5);
+  }
+
+  #skip:hover {
+    background: rgba(0,70,255,0.5);
+  }
 }
