@@ -1,16 +1,19 @@
-
 <!doctype html>
 <html lang="ru">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Играть в города. Онлайн игра в названия городов</title>
+
+        <title>Городки</title>
+
         <meta name="author" content="ThEVlaDGamE x degradik">
-        <meta name="keywords" content="играть, города, онлайн">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link href="css/app.css" rel="stylesheet" type="text/css">
-        <link rel="icon" href="/favicon.ico">
+        <meta name="keywords" content="играть, города, онлайн, русский, язык">
+        <meta name="description" content="Играть в города. Онлайн игра в названия городов. Онлайн игра в города на русском языке">
+
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">
+
+        <link rel="icon" href="icon.ico">
     </head>
     <body>
       <div class="header">
@@ -28,14 +31,14 @@
           <div class="col" id="answers">
             <form action="POST">
               <div class="form-group">
-                <label for="exampleInputPassword1" class="enemy_title_label">Ответ противника:</label>
+                <label for="exampleInputPassword1" class="titleLabel">Ответ противника:</label>
                 <p id = "answer"></p>
               </div>
             </form>
           </div>
           <div class="col" id="answers">
             <div class="form-group">
-              <label for="exampleInputPassword1" class="your_title_label">Ваш ответ:</label>
+              <label for="exampleInputPassword1" class="titleLabel">Ваш ответ:</label>
               <div id = "answer" class = "your_answer" contenteditable></div>
             </div>
             <button type="button" id = "send" onclick="SubmitAnswer();">Отправить</button>
@@ -44,7 +47,7 @@
           <div class="col" id="answers">
             <form action="POST">
               <div class="form-group">
-                <p id = "answer" class = "check_answer"></p>
+                <p id = "answer" class = "check_answer">Удачи :)</p>
               </div>
             </form>
           </div>
@@ -61,7 +64,5 @@
       </div>
       <script src="bootstrap.js"></script>
       <script src="index.js"></script>
-      <script src="/js/app.js?v=1"></script>
-      <script src="/js/jquery-ui.js"></script>
     </body>
 </html>

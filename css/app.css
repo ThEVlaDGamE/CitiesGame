@@ -14,17 +14,25 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: #022;
-  background: url("https://img1.akspic.ru/crops/1/5/8/8/6/168851/168851-nyujork-medison_skver_park-fletajron_bilding-centralnyj_park-yunion_skver-3840x2160.jpg") fixed;
+  /*background: url("https://img1.akspic.ru/crops/1/5/8/8/6/168851/168851-nyujork-medison_skver_park-fletajron_bilding-centralnyj_park-yunion_skver-3840x2160.jpg") fixed;
+  */
+  
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   z-index: -3;
-  backdrop-filter: brightness(60%);
+  /*backdrop-filter: brightness(60%);*/
 }
 
 
 .header_name {
   color: lightgreen;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-family: 'M PLUS Rounded 1c', cursive;
+  font-weight: bold;
+  font-size: 40px;
   padding: 20px 10px 10px 0;
   border-bottom: 2px solid rgb(99, 99, 99);
 }
@@ -47,6 +55,11 @@ body {
   color: yellow;
 }
 
+.titleLabel {
+  color: rgb(245, 96, 10);
+  font-size: 17px;
+}
+
 .enemy_title_label {
   color: orangered;
 }
@@ -57,15 +70,6 @@ body {
 
 .rule_text, #score {
   color: lightskyblue;
-  /*text-shadow:
-      0 0 7px #fff2,
-      0 0 10px #fff2,
-      0 0 21px #fff2,
-      0 0 42px #0fa2,
-      0 0 82px #0fa2,
-      0 0 92px #0fa2,
-      0 0 102px #0fa2,
-      0 0 151px #0fa2;*/
 }
 
 #answer {
@@ -76,8 +80,7 @@ body {
   border: 1px solid white;
   border-radius: 5px;
   background: rgba(0,0,0,0.5);
-  min-width: 40%;
-  max-width: 80%;
+  width: 90%;
   padding: 10px;
 }
 
@@ -97,6 +100,10 @@ body {
 
 .check_answer {
   margin-bottom: 0;
+}
+
+.text-center {
+  text-align: center !important;
 }
 
 #send {
