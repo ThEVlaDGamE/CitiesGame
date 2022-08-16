@@ -161,7 +161,7 @@ function GetFirstSymbol(text) {
 // Функция нажатия на кнопку ответа
 function SubmitAnswer() {
     // Получить ответ
-    let answer = document.getElementsByClassName("your_answer")['answer'].innerHTML;
+    let answer = document.getElementsByClassName("your_answer")['answer'].innerHTML.toString().replace(/&nbsp;/g,'').trim();
     // Проверки ответа
     // Пустое ли поле?
     if (answer != "") {
